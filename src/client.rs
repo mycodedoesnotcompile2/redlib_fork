@@ -33,6 +33,23 @@ const ALTERNATIVE_REDDIT_URL_BASE_HOST: &str = "www.reddit.com";
 pub static HTTPS_CONNECTOR: LazyLock<HttpsConnector<ProxyConnector>> = LazyLock::new(|| {
 	let proxy_connector = ProxyConnector::new();
 	hyper_rustls::HttpsConnectorBuilder::new()
+				.with_tls_config(
+					rustls::ClientConfig::builder()
+					.with_cipher_suites(&[
+						rustls::cipher_suite::TLS13_AES_256_GCM_SHA384,
+						rustls::cipher_suite::TLS13_AES_128_GCM_SHA256,
+						rustls::cipher_suite::TLS13_CHACHA20_POLY1305_SHA256,
+						rustls::cipher_suite::TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
+						rustls::cipher_suite::TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
+						rustls::cipher_suite::TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256,
+						rustls::cipher_suite::TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256,
+						rustls::cipher_suite::TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,
+						rustls::cipher_suite::TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
+					])
+				)
+				.with_safe_default_kx_groups()
+				.with_safe_default_protocol_versions()
+				.unwrap()
 		.with_native_roots()
 		.https_only()
 		.enable_http2()
