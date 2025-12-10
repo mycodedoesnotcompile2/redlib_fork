@@ -4,7 +4,7 @@ use futures_lite::future::block_on;
 use futures_lite::{future::Boxed, FutureExt};
 use hyper::header::HeaderValue;
 use hyper::{body, body::Buf, header, Body, Client, Method, Request, Response, Uri};
-use hyper_rustls::HttpsConnector;
+use hyper_rustls::{ConfigBuilderExt, HttpsConnector};
 use libflate::gzip;
 use log::{error, trace, warn};
 use percent_encoding::{percent_encode, CONTROLS};
