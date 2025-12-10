@@ -90,7 +90,8 @@ jobs:
         id: release_commit_id
         run: |
           cd /tmp/
-          git clone 'https://github.com/mycodedoesnotcompile2/redlib_fork.git' -o redlib
+          git clone 'https://github.com/mycodedoesnotcompile2/redlib_fork.git' redlib
+          ls -alh .
 
           cd $REDLIB_ROOT_DIR
           
