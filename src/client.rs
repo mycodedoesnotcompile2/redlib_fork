@@ -48,7 +48,7 @@ pub static HTTPS_CONNECTOR: LazyLock<HttpsConnector<ProxyConnector>> = LazyLock:
 			.with_safe_default_kx_groups()
 			.with_safe_default_protocol_versions()
 			.unwrap()
-			.with_native_roots()
+			.with_native_roots(),
 		)
 		.https_only()
 		.enable_http2()
